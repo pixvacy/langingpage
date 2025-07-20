@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Acesso VIP Liberado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a0a2e, #2d0b3a, #4a0b4a);
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(233, 30, 99, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 64, 129, 0.15) 0%, transparent 40%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+            padding: 50px 30px;
+            background: rgba(25, 15, 35, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 40px rgba(233, 30, 99, 0.4);
+            border: 1px solid rgba(255, 64, 129, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #e91e63, #ff4081, #f50057);
+        }
+        
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            background: #ff4081;
+            top: 0;
+            opacity: 0;
+        }
+        
+        .confetti-piece:nth-child(1) {
+            left: 7%;
+            transform: rotate(-40deg);
+            animation: makeItRain 1000ms infinite ease-out;
+            animation-delay: 182ms;
+            animation-duration: 1116ms;
+        }
+        
+        .confetti-piece:nth-child(2) {
+            left: 14%;
+            transform: rotate(4deg);
+            animation: makeItRain 1000ms infinite ease-out;
+            animation-delay: 161ms;
+            animation-duration: 1076ms;
+        }
+        
+        .confetti-piece:nth-child(3) {
+            left: 21%;
+            transform: rotate(-51deg);
+            animation: makeItRain 1000ms infinite ease-out;
+            animation-delay: 481ms;
+            animation-duration: 1103ms;
+        }
+        
+        .confetti-piece:nth-child(4) {
+            left: 28%;
+            transform: rotate(61deg);
+            animation: makeItRain 1000ms infinite ease-out;
+            animation-delay: 334ms;
+            animation-duration: 708ms;
+        }
+        
+        .confetti-piece:nth-child(5) {
+            left: 35%;
+            transform: rotate(-52deg);
+            animation: makeItRain 1000ms infinite ease-out;
+            animation-delay: 302ms;
+            animation-duration: 776ms;
+        }
+        
+        .confetti-piece:nth-child(6) {
+            left: 42%;
+            transform: rotate(38deg);
+            animation: makeItRain 1000ms infinite ease-out;
+            animation-delay: 180ms;
+            animation-duration: 1168ms;
+        }
+        
+        .confetti-piece:nth-child(7) {
+            left: 49%;
+            transform: rotate(11deg);
+            animation: makeItRain 1000ms infinite ease-out;
+            animation-delay: 395ms;
+            animation-duration: 1200ms;
+        }
+        
+        .confetti-piece:nth-child(8) {
+            left: 56%;
+            transform: rotate(49deg);
+            animation: makeItRain 1000ms infinite ease-out;
+            animation-delay: 14ms;
+            animation-duration: 887ms;
+        }
+        
+        .confetti-piece:nth-child(9) {
+            left: 63%;
+            transform: rotate(-72deg);
+            animation: makeItRain 1000ms infinite ease-out;
+            animation-delay: 149ms;
+            animation-duration: 805ms;
+        }
+        
+        .confetti-piece:nth-child(10) {
+            left: 70%;
+            transform: rotate(10deg);
+            animation: makeItRain 1000ms infinite ease-out;
+            animation-delay: 351ms;
+            animation-duration: 1059ms;
+        }
+        
+        .confetti-piece:nth-child(11) {
+            left: 77%;
+            transform: rotate(4deg);
+            animation: makeItRain 1000ms infinite ease-out;
+            animation-delay: 307ms;
+            animation-duration: 1132ms;
+        }
+        
+        .confetti-piece:nth-child(12) {
+            left: 84%;
+            transform: rotate(42deg);
+            animation: makeItRain 1000ms infinite ease-out;
+            animation-delay: 464ms;
+            animation-duration: 776ms;
+        }
+        
+        .confetti-piece:nth-child(13) {
+            left: 91%;
+            transform: rotate(-72deg);
+            animation: makeItRain 1000ms infinite ease-out;
+            animation-delay: 429ms;
+            animation-duration: 818ms;
+        }
+        
+        @keyframes makeItRain {
+            from {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+        
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .success-icon .circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(76, 175, 80, 0.1);
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: pulse 2s infinite;
+        }
+        
+        .success-icon .check {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            color: #4CAF50;
+            text-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+        }
+        
+        .header {
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #ff4081, #ff9ec0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            color: #d0d0d0;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .model-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 64, 129, 0.5);
+            margin: 30px auto;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 30px rgba(233, 30, 99, 0.6);
+        }
+        
+        .model-photo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(233, 30, 99, 0.3));
+        }
+        
+        .model-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            margin: 40px 0 20px;
+            padding: 18px 45px;
+            background: linear-gradient(90deg, #e91e63, #ff4081);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 20px rgba(233, 30, 99, 0.6);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.8);
+        }
+        
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(25deg);
+            transition: all 0.6s;
+        }
+        
+        .cta-button:hover::after {
+            left: 140%;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .feature {
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 64, 129, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 64, 129, 0.1);
+            border-color: rgba(255, 64, 129, 0.4);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            color: #ff4081;
+            margin-bottom: 15px;
+        }
+        
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #ff9ec0;
+        }
+        
+        .feature p {
+            font-size: 0.95rem;
+            color: #c0c0c0;
+        }
+        
+        .footer-note {
+            margin-top: 30px;
+            color: #a0a0a0;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 64, 129, 0.2);
+            padding-top: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            color: #e91e63;
+            font-size: 24px;
+            opacity: 0;
+            animation: float 8s infinite linear;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .features {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="heartsContainer"></div>
+    <div class="confetti" id="confettiContainer"></div>
+    
+    <div class="container">
+        <div class="success-icon">
+            <div class="circle"></div>
+            <div class="check"><i class="fas fa-check"></i></div>
+        </div>
+        
+        <div class="header">
+            <h1>Parabéns! Seu acesso VIP foi liberado por <b>3 Meses!</b></h1>
+            <p>Agora você tem acesso completo ao conteúdo exclusivo da Nicoli Martins. Clique no botão abaixo para entrar no grupo VIP.</p>
+        </div>
+        
+        <div class="model-photo">
+            <img src="images/fotoperfilmelmaia1.jpg" alt="Nicoli Martins">
+        </div>
+        
+        <a href="#" class="cta-button">
+            <i class="fas fa-lock-open"></i> Entrar no Grupo VIP
+        </a>
+        
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-star"></i>
+                <h3>Conteúdo Exclusivo</h3>
+                <p>Acesso a fotos e vídeos que não estão disponíveis em nenhum outro lugar.</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-comments"></i>
+                <h3>Comunidade Privada</h3>
+                <p>Participe de um grupo seleto de fãs com acesso direto à Nicoli.</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-gift"></i>
+                <h3>Conteúdo Personalizado</h3>
+                <p>Solicite conteúdo feito especialmente para você.</p>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            <p><i class="fas fa-shield-alt"></i> Este é um ambiente seguro e privado. Todo o conteúdo é exclusivo para membros VIP.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Criar corações flutuantes
+            const heartsContainer = document.getElementById('heartsContainer');
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heartsContainer.appendChild(heart);
+            }
+            
+            // Criar confetes
+            const confettiContainer = document.getElementById('confettiContainer');
+            for (let i = 0; i < 13; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-piece';
+                confetti.style.background = getRandomColor();
+                confettiContainer.appendChild(confetti);
+            }
+            
+            // Função para gerar cores aleatórias
+            function getRandomColor() {
+                const colors = ['#ff4081', '#e91e63', '#f50057', '#ff9ec0', '#ff80ab'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+            
+            // Pixel Purchase
+            !function(f,b,e,v,n,t,s) {
+                if(f.fbq)return;
+                n=f.fbq=function() {
+                    n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
+                };
+                if(!f._fbq)f._fbq=n;
+                n.push=n;
+                n.loaded=!0;
+                n.version='2.0';
+                n.queue=[];
+                t=b.createElement(e);
+                t.async=!0;
+                t.src=v;
+                s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)
+            }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+            
+            fbq('init', 'PIXEL_ID_AQUI');
+            fbq('track', 'Purchase');
+        });
+    </script>
+</body>
+</html>
