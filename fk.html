@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Nexus Digital Solutions - Marketing Performance</title>
+  <meta name="description" content="Soluções completas em marketing digital, automação e gestão de tráfego para empresas selecionadas">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --dark-text: #1e293b;
+      --light-text: #ffffff;
+      --gray-600: #64748b;
+      --gray-200: #e2e8f0;
+      --radius: 8px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: var(--dark-text);
+      line-height: 1.6;
+    }
+
+    .header {
+      background-color: white;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 1.8rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark-text);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--dark-text);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--gray-600);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    .cta-button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .services {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    .services h2 {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2rem;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background-color: white;
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .service-card h3 {
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      color: var(--gray-600);
+    }
+
+    .testimonials {
+      background-color: white;
+      padding: 4rem 2rem;
+      margin-top: 3rem;
+    }
+
+    .testimonials h2 {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2rem;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      background-color: #f8fafc;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--primary);
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 1rem;
+      color: var(--dark-text);
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .footer {
+      background-color: var(--dark-text);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-links a {
+      color: var(--gray-200);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .copyright {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+    }
+
+    /* Página de contato simulada */
+    .contact-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: var(--radius);
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .close-modal {
+      float: right;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fas fa-chart-network"></i>
+        <span>Nexus Solutions</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#services">Serviços</a>
+        <a href="#about">Sobre</a>
+        <a href="#clients">Clientes</a>
+        <a href="#" id="contact-link">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Otimização de Performance Digital</h1>
+    <p>Ferramentas proprietárias e estratégias personalizadas para gestão de tráfego de alto desempenho</p>
+    <a href="#" class="cta-button" id="demo-btn">Solicitar Demonstração</a>
+  </section>
+
+  <section class="services" id="services">
+    <h2>Nossas Soluções Especializadas</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <h3>Gestão de Tráfego</h3>
+        <p>Sistemas proprietários para aquisição e conversão de tráfego qualificado em todas as plataformas digitais.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-robot"></i>
+        </div>
+        <h3>Automação de Marketing</h3>
+        <p>Fluxos automatizados de nutrição e conversão com tecnologia exclusiva para maximizar resultados.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>Proteção & Compliance</h3>
+        <p>Soluções completas para garantir conformidade com regulamentações de plataformas e privacidade.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="clients">
+    <h2>O que dizem nossos clientes</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">"A Nexus revolucionou nossa aquisição de clientes, com redução de 40% no CPA e aumento de 200% na conversão."</p>
+        <p class="testimonial-author">- Ricardo M., E-commerce</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">"As soluções de proteção nos permitiram escalar com segurança em plataformas restritas."</p>
+        <p class="testimonial-author">- Ana L., SaaS Platform</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Ferramentas indispensáveis para quem trabalha com performance digital em alto nível."</p>
+        <p class="testimonial-author">- Carlos S., Agência Digital</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="#">Termos de Serviço</a>
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Segurança</a>
+      <a href="#">Compliance</a>
+    </div>
+    <p class="copyright">© 2025 Nexus Digital Solutions. Todos os direitos reservados.</p>
+    <p class="copyright">CNPJ: 12.345.678/0001-99 | São Paulo - SP</p>
+  </footer>
+
+  <!-- Modal de contato simulado -->
+  <div class="contact-modal" id="contact-modal">
+    <div class="modal-content">
+      <span class="close-modal" id="close-modal">&times;</span>
+      <h3>Solicite Informações</h3>
+      <p>Preencha o formulário abaixo e nossa equipe entrará em contato:</p>
+      <form style="margin-top: 1.5rem;">
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; margin-bottom: 0.5rem;">Nome</label>
+          <input type="text" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; margin-bottom: 0.5rem;">E-mail</label>
+          <input type="email" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; margin-bottom: 0.5rem;">Mensagem</label>
+          <textarea style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; min-height: 100px;"></textarea>
+        </div>
+        <button type="button" style="background-color: var(--primary); color: white; border: none; padding: 0.7rem 1.5rem; border-radius: 4px; cursor: pointer;">Enviar Mensagem</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Simula funcionalidades do site (sem realmente enviar dados)
+    document.getElementById('contact-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('contact-modal').style.display = 'flex';
+    });
+
+    document.getElementById('demo-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('contact-modal').style.display = 'flex';
+    });
+
+    document.getElementById('close-modal').addEventListener('click', function() {
+      document.getElementById('contact-modal').style.display = 'none';
+    });
+
+    // Fecha modal ao clicar fora
+    window.addEventListener('click', function(e) {
+      if (e.target === document.getElementById('contact-modal')) {
+        document.getElementById('contact-modal').style.display = 'none';
+      }
+    });
+
+    // Adiciona classe ativa ao scroll (para parecer mais real)
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('.header');
+      if (window.scrollY > 50) {
+        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+      } else {
+        header.style.boxShadow = 'var(--shadow)';
+      }
+    });
+
+    // Desativa todos os forms
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Obrigado pelo seu interesse. Nossa equipe entrará em contato em breve.');
+        document.getElementById('contact-modal').style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>
