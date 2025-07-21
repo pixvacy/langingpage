@@ -834,63 +834,56 @@
 
       <!-- Informações do Perfil -->
       <div class="card profile-card" style="margin-top: 20px">
-        <div class="card-content">
-          <div style="display: flex; align-items: center; gap: 4px">
-            <span>NicoliMartins
-            <span class="verified-badge">
-              <i class="fas fa-badge-check"></i>
-            </span>
-          </span></div>
+  <div class="card-content">
+    <div style="display: flex; align-items: center; gap: 4px">
+      <span>NicoliMartins</span>
+      <span class="verified-badge">
+        <i class="fas fa-badge-check"></i>
+      </span>
+    </div>
 
-          <p class="username">@Cami.linhaax</p>
+    <p class="username">@Cami.linhaax</p>
 
-          <div class="bio">
-            <p>Oi, eu sou a Nicoli. Tenho 22 anos, sou intensa, curiosa, e nada básica.  
-Adoro provocar, mas o que eu mais gosto... é saber que alguém tá assistindo tudo com atenção.</p>
-              <p>Criei esse espaço pra quem prefere o real — sem filtros, sem enrolação.  
-Conteúdo exclusivo, em 4K, com categorias pra todos os gostos e acessos 100% anônimos.  
-Aqui, quem manda é o seu desejo — e eu adoro obedecer quando ele é direto.</p>
+    <div class="bio">
+      <p>Oi, eu sou a Nicoli. Tenho 22 anos, sou intensa, curiosa, e nada básica. Adoro provocar, mas o que eu mais gosto... é saber que alguém tá assistindo tudo com atenção.</p>
+      <p>Criei esse espaço pra quem prefere o real — sem filtros, sem enrolação. Conteúdo exclusivo, em 4K, com categorias pra todos os gostos e acessos 100% anônimos. Aqui, quem manda é o seu desejo — e eu adoro obedecer quando ele é direto.</p>
 
-            <p><i class="fas fa-fire" style="color: var(--secondary);"></i> <strong>O que te espera aqui:</strong></p>
-              <p><i class="fas fa-camera"></i> <strong>Fotos e vídeos intensos</strong>, em 4K e sem censura — só o tipo de conteúdo que você não encontra nas redes sociais.</p>
-              <p><i class="fas fa-play-circle"></i> <strong>Momentos reais e bastidores privados</strong> — cenas que eram pra ser só minhas... mas agora são suas também.</p>
-              <p><i class="fas fa-lock"></i> <strong>Acesso privado e seguro</strong> — você entra anônimo, assiste o que quiser, e ninguém nunca vai saber.</p>
-
+      <p><i class="fas fa-fire" style="color: var(--secondary);"></i> <strong>O que te espera aqui:</strong></p>
+      <p><i class="fas fa-camera"></i> <strong>Fotos e vídeos intensos</strong>, em 4K e sem censura — só o tipo de conteúdo que você não encontra nas redes sociais.</p>
+      <p><i class="fas fa-play-circle"></i> <strong>Momentos reais e bastidores privados</strong> — cenas que eram pra ser só minhas... mas agora são suas também.</p>
+      <p><i class="fas fa-lock"></i> <strong>Acesso privado e seguro</strong> — você entra anônimo, assiste o que quiser, e ninguém nunca vai saber.</p>
+    </div>
+    
+    <!-- Barra de Áudio Corrigida -->
+    <div class="audio-player">
+      <div class="audio-header">
+        <i class="fas fa-microphone-alt"></i>
+        <h4>Mensagem de voz da Nicoli</h4>
+      </div>
+      
+      <div class="audio-controls">
+        <button class="play-btn" id="playBtn">
+          <i class="fas fa-play"></i>
+        </button>
+        
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+        
+        <div class="volume-control">
+          <i class="fas fa-volume-up"></i>
+          <div class="volume-slider" id="volumeSlider">
+            <div class="volume-level" id="volumeLevel"></div>
           </div>
-          
-          <!-- Barra de Áudio -->
-          <div class="audio-player">
-            <div class="audio-header">
-              <i class="fas fa-microphone-alt"></i>
-              <h4>Mensagem de voz da Nicoli</h4>
-            </div>
-            
-            <div class="audio-controls">
-              <button class="play-btn" id="playBtn">
-                <i class="fas fa-play"></i>
-              </button>
-              
-              <div class="progress-container" id="progressContainer">
-                <div class="progress-bar" id="progressBar"></div>
-              </div>
-              
-              <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
-              
-              <div class="volume-control">
-                <i class="fas fa-volume-up"></i>
-                <div class="volume-slider" id="volumeSlider">
-                  <div class="volume-level" id="volumeLevel"></div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="audio-wave" id="audioWave">
-              <!-- As barras de onda serão geradas pelo JavaScript -->
-            </div>
-          </div>
-          
         </div>
       </div>
+      
+      <div class="audio-wave" id="audioWave"></div>
+    </div>
+  </div>
+</div>
 
       <!-- Social Proof -->
       <div class="social-proof">
