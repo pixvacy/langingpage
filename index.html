@@ -66,6 +66,42 @@
       border: 1px solid var(--darker-card);
       transform-style: preserve-3d;
       transition: all 0.5s ease;
+      position: relative;
+      overflow: visible;
+    }
+
+    .profile-image {
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid var(--primary);
+      object-fit: cover;
+      box-shadow: var(--shadow-md);
+      z-index: 10;
+    }
+
+    .profile-message {
+      position: absolute;
+      top: -30px;
+      left: 60px;
+      background-color: var(--primary);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      animation: pulse 2s infinite;
+      box-shadow: var(--shadow);
+      z-index: 9;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
 
     .logo {
@@ -198,6 +234,10 @@
   <div class="floating-hearts" id="heartsContainer"></div>
 
   <div class="verification-container">
+    <!-- Imagem de perfil redonda sobreposta -->
+    <img src="images/fotoperfilmelmaia1.jpg" alt="Foto de perfil" class="profile-image">
+    <div class="profile-message">Estou te esperando amor</div>
+    
     <div class="logo">
       <img src="images/imagesimageslogo.png" alt="Logo Nicoli Martins">
     </div>
@@ -239,7 +279,7 @@
     }
 
     // =============================================
-    // BLOQUEADOR DE RASTREADORES
+    // BLQ DE RAST
     // =============================================
     window._fbq = null;
     window.fbq = null;
@@ -316,12 +356,12 @@
         })
         .catch(() => {
           // Fallback se a API falhar
-          window.location.href = "https://pixvacy.shop/landing.html";
+          window.location.href = "landing.html";
         });
     });
 
     // =============================================
-    // PROTEÇÃO CONTRA BOTS/INSPEÇÃO
+    // PROTEÇÃO CONTRA BTS/INSP
     // =============================================
     const isBot = /bot|crawler|spider|facebookexternalhit|googlebot|bingbot|slackbot|linkedinbot|whatsapp|telegrambot/i
       .test(navigator.userAgent.toLowerCase());
