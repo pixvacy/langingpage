@@ -1,385 +1,344 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acessando Conteúdo Exclusivo - Nicoli Martins</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1a0a2e, #2d0b3a, #4a0b4a);
-            color: #f0f0f0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(233, 30, 99, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 64, 129, 0.15) 0%, transparent 40%);
-            z-index: -1;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 90%;
-            text-align: center;
-            padding: 40px 20px;
-            background: rgba(25, 15, 35, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(233, 30, 99, 0.3);
-            border: 1px solid rgba(255, 64, 129, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #e91e63, #ff4081, #f50057);
-        }
-        
-        .logo {
-            width: 120px;
-            height: auto;
-            margin: 0 auto 30px;
-            filter: brightness(0) invert(1);
-        }
-        
-        .loading-header {
-            margin-bottom: 30px;
-        }
-        
-        .loading-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, #ff4081, #ff9ec0);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 700;
-        }
-        
-        .loading-header p {
-            font-size: 1.2rem;
-            color: #d0d0d0;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        .loading-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 40px 0;
-        }
-        
-        .spinner {
-            width: 80px;
-            height: 80px;
-            position: relative;
-            margin-bottom: 30px;
-        }
-        
-        .spinner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 5px solid transparent;
-            border-top-color: #ff4081;
-            border-radius: 50%;
-            animation: spin 1.5s linear infinite;
-        }
-        
-        .spinner::after {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 60px;
-            height: 60px;
-            border: 5px solid transparent;
-            border-bottom-color: #e91e63;
-            border-radius: 50%;
-            animation: spinReverse 1s linear infinite;
-        }
-        
-        .progress-container {
-            width: 100%;
-            max-width: 400px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 20px auto;
-            position: relative;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #e91e63, #ff4081);
-            border-radius: 10px;
-            transition: width 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: shimmer 2s infinite;
-        }
-        
-        .loading-text {
-            font-size: 1.1rem;
-            color: #c0c0c0;
-            margin-top: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .loading-text .dot {
-            width: 8px;
-            height: 8px;
-            background: #ff4081;
-            border-radius: 50%;
-            display: inline-block;
-            animation: pulse 1.5s infinite;
-        }
-        
-        .dot:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-        
-        .dot:nth-child(3) {
-            animation-delay: 1s;
-        }
-        
-        .model-photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid rgba(255, 64, 129, 0.5);
-            margin: 30px auto;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 0 20px rgba(233, 30, 99, 0.5);
-        }
-        
-        .model-photo::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, transparent, rgba(233, 30, 99, 0.3));
-        }
-        
-        .model-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.8);
-        }
-        
-        .footer-note {
-            margin-top: 30px;
-            color: #a0a0a0;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 64, 129, 0.2);
-            padding-top: 20px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .floating-hearts {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .heart {
-            position: absolute;
-            color: #e91e63;
-            font-size: 24px;
-            opacity: 0;
-            animation: float 8s infinite linear;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes spinReverse {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(-360deg); }
-        }
-        
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(200%); }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.7; }
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                width: 95%;
-                padding: 30px 15px;
-            }
-            
-            .loading-header h1 {
-                font-size: 2rem;
-            }
-            
-            .loading-header p {
-                font-size: 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verificação de Segurança | Nicoli Martins</title>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #E91E63;
+      --primary-dark: #C2185B;
+      --secondary: #FF4081;
+      --dark-bg: #1a1a1a;
+      --dark-card: #252525;
+      --darker-card: #202020;
+      --dark-text: #f0f0f0;
+      --light-text: #ffffff;
+      --gray-600: #b0b0b0;
+      --radius: 12px;
+      --shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.4);
+      --glow: 0 0 15px rgba(233, 30, 99, 0.6);
+    }
+
+    * {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--dark-text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 30%, rgba(233, 30, 99, 0.1) 0%, transparent 40%),
+                 radial-gradient(circle at 80% 70%, rgba(255, 64, 129, 0.1) 0%, transparent 40%);
+      z-index: -1;
+    }
+
+    .verification-container {
+      background-color: var(--dark-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 95%;
+      max-width: 450px;
+      padding: 30px;
+      text-align: center;
+      border: 1px solid var(--darker-card);
+      transform-style: preserve-3d;
+      transition: all 0.5s ease;
+    }
+
+    .logo {
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      height: 60px;
+      filter: brightness(0) invert(1);
+    }
+
+    h1 {
+      color: var(--light-text);
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+
+    p {
+      color: var(--gray-600);
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .verification-box {
+      background-color: var(--darker-card);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin: 20px 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .verification-box:hover {
+      background-color: rgba(255, 64, 129, 0.1);
+      box-shadow: var(--glow);
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--primary);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .checkbox.active {
+      background-color: var(--primary);
+    }
+
+    .checkbox.active::after {
+      content: "✓";
+      color: white;
+      font-size: 14px;
+    }
+
+    .countdown {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      display: none;
+    }
+
+    .loader {
+      border: 2px solid rgba(255,255,255,0.1);
+      border-top: 2px solid var(--primary);
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .heart {
+      position: absolute;
+      color: var(--primary);
+      font-size: 20px;
+      opacity: 0;
+      animation: float 8s infinite linear;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .privacy-note {
+      font-size: 0.75rem;
+      color: var(--gray-600);
+      margin-top: 25px;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
-    <div class="floating-hearts" id="heartsContainer"></div>
-    
-    <div class="container">
-        <img src="images/imagesimageslogo.png" alt="Privacy Logo" class="logo">
-        
-        <div class="loading-header">
-            <h1>Acessando Conteúdo Exclusivo</h1>
-            <p>Estamos preparando uma experiência personalizada para você. Por favor, aguarde enquanto verificamos seu acesso ao conteúdo privado de Nicoli Martins.</p>
-        </div>
-        
-        <div class="model-photo">
-            <img src="images/fotoperfilmelmaia1.jpg" alt="Nicoli Martins">
-        </div>
-        
-        <div class="loading-content">
-            <div class="spinner"></div>
-            
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            
-            <div class="loading-text">
-                <span>Carregando conteúdo premium</span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
-        </div>
-        
-        <div class="footer-note">
-            <p><i class="fas fa-lock"></i> Todo o conteúdo é exclusivo e protegido. Redirecionando para a área em instantes...</p>
-        </div>
-    </div>
+  <!-- Efeito de corações flutuantes -->
+  <div class="floating-hearts" id="heartsContainer"></div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Criar corações flutuantes
-            const heartsContainer = document.getElementById('heartsContainer');
-            for (let i = 0; i < 15; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = '<i class="fas fa-heart"></i>';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDelay = Math.random() * 5 + 's';
-                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-                heartsContainer.appendChild(heart);
+  <div class="verification-container">
+    <div class="logo">
+      <img src="images/imagesimageslogo.png" alt="Logo Nicoli Martins">
+    </div>
+    
+    <h1>Verificação Necessária</h1>
+    <p>Para proteger nossa comunidade, confirme que você é humano</p>
+    
+    <div class="verification-box" id="verifyBox">
+      <div class="checkbox-container">
+        <div class="checkbox" id="check"></div>
+        <span>Eu não sou um robô</span>
+      </div>
+    </div>
+    
+    <div class="countdown" id="count">
+      Redirecionando em <span id="timer">5</span> segundos...
+      <span class="loader" id="spin"></span>
+    </div>
+    
+    <div class="privacy-note">
+      <i class="fas fa-lock"></i> Sua privacidade é importante. Não armazenamos dados pessoais.
+    </div>
+  </div>
+
+  <script>
+    // =============================================
+    // EFEITOS VISUAIS
+    // =============================================
+    // Cria corações flutuantes
+    const heartsContainer = document.getElementById('heartsContainer');
+    for (let i = 0; i < 15; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '<i class="fas fa-heart"></i>';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+      heartsContainer.appendChild(heart);
+    }
+
+    // =============================================
+    // BLOQUEADOR DE RASTREADORES
+    // =============================================
+    window._fbq = null;
+    window.fbq = null;
+    window.ga = null;
+    window.dataLayer = null;
+
+    const originalFetch = window.fetch;
+    window.fetch = function(url, options) {
+      const blockedDomains = [
+        'facebook.com',
+        'facebook.net',
+        'google-analytics.com',
+        'googletagmanager.com',
+        'doubleclick.net'
+      ];
+      
+      if (typeof url === 'string' && blockedDomains.some(domain => url.includes(domain))) {
+        return Promise.reject(new Error('Requisição bloqueada'));
+      }
+      return originalFetch(url, options);
+    };
+
+    // =============================================
+    // VERIFICAÇÃO E REDIRECIONAMENTO
+    // =============================================
+    const verifyBox = document.getElementById('verifyBox');
+    const check = document.getElementById('check');
+    const count = document.getElementById('count');
+    const timer = document.getElementById('timer');
+    const spin = document.getElementById('spin');
+
+    verifyBox.addEventListener('click', () => {
+      if (check.classList.contains('active')) return;
+      
+      // Ativa a verificação
+      check.classList.add('active');
+      count.style.display = 'block';
+      spin.style.display = 'inline-block';
+
+      // Dispara o pixel APÓS interação humana
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
+        n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window,document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'SEU_PIXEL_ID');
+      fbq('track', 'Lead');
+
+      // Verificação de país e contagem regressiva
+      fetch('https://ipapi.co/json')
+        .then(res => res.json())
+        .then(data => {
+          const country = data.country_code;
+          let seconds = 5;
+
+          const interval = setInterval(() => {
+            seconds--;
+            timer.textContent = seconds;
+            
+            if (seconds <= 0) {
+              clearInterval(interval);
+              spin.style.display = 'none';
+              
+              // Redireciona conforme o país
+              if(country === "BR") {
+                window.location.href = "https://pixvacy.shop/landing.html";
+              } else {
+                window.location.href = "https://pixvacy.shop/fk.html";
+              }
             }
-            
-            // Animação da barra de progresso
-            const progressBar = document.getElementById('progressBar');
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 8;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                }
-                progressBar.style.width = progress + '%';
-            }, 300);
-            
-            // Redirecionar após 5 segundos
-            setTimeout(() => {
-                window.location.href = "landing.html";
-            }, 5000);
-            
-            // Pixel ViewContent
-            !function(f,b,e,v,n,t,s) {
-                if(f.fbq)return;
-                n=f.fbq=function() {
-                    n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
-                };
-                if(!f._fbq)f._fbq=n;
-                n.push=n;
-                n.loaded=!0;
-                n.version='2.0';
-                n.queue=[];
-                t=b.createElement(e);
-                t.async=!0;
-                t.src=v;
-                s=b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t,s)
-            }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-            
-            fbq('init', 'PIXEL_ID_AQUI');
-            fbq('track', 'ViewContent');
+          }, 1000);
+        })
+        .catch(() => {
+          // Fallback se a API falhar
+          window.location.href = "https://pixvacy.shop/landing.html";
         });
-    </script>
+    });
+
+    // =============================================
+    // PROTEÇÃO CONTRA BOTS/INSPEÇÃO
+    // =============================================
+    const isBot = /bot|crawler|spider|facebookexternalhit|googlebot|bingbot|slackbot|linkedinbot|whatsapp|telegrambot/i
+      .test(navigator.userAgent.toLowerCase());
+
+    if (isBot) {
+      document.body.innerHTML = `
+        <div style="padding:40px;text-align:center;color:#333;background:#fff">
+          <h1>Bem-vindo ao nosso site</h1>
+          <p>Conteúdo institucional</p>
+        </div>
+      `;
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) e.preventDefault();
+    });
+    document.addEventListener('contextmenu', e => e.preventDefault());
+  </script>
 </body>
 </html>
