@@ -899,7 +899,18 @@
     
     <!-- Banner Promocional -->
     <div class="promo-banner" id="promoBanner">
-      <i class="fas fa-fire"></i> PROMOÇÃO VÁLIDA ATÉ 22/07/2025 <i class="fas fa-fire"></i>
+      <i class="fas fa-fire"></i> 
+PROMOÇÃO VÁLIDA ATÉ <span id="data-hoje"></span> 
+<i class="fas fa-fire"></i>
+
+<script>
+  const hoje = new Date();
+  const dia = String(hoje.getDate()).padStart(2, '0');
+  const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+  const ano = hoje.getFullYear();
+  document.getElementById('data-hoje').textContent = `${dia}/${mes}/${ano}`;
+</script>
+
     </div>
 
     <!-- Cabeçalho -->
