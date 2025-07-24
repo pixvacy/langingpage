@@ -192,33 +192,9 @@
   </script>
 
   <!-- Facebook Pixel com localStorage -->
-  <script>
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){
-        n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)
-    }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  
 
-    if (!localStorage.getItem('purchaseFired_4990')) {
-      fbq('init', '1112317040712590');
-      fbq('track', 'Purchase', {
-        value: 29.90,
-        currency: 'BRL',
-        content_name: 'Acesso Premium - 3 meses - Camila',
-        content_ids: ['premium3meses-camila'],
-        content_type: 'product'
-      });
-      localStorage.setItem('purchaseFired_4990', 'true');
-    }
-  </script>
-
-  <noscript>
-    <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=1112317040712590&ev=Purchase&noscript=1"/>
-  </noscript>
+  
 
 </body>
 </html>
