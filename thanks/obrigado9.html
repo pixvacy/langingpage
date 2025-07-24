@@ -177,9 +177,8 @@
     </div>
   </div>
 
-  <!-- Facebook Pixel + corações -->
+  <!-- Floating hearts -->
   <script>
-    // Floating hearts
     const heartsContainer = document.getElementById('heartsContainer');
     for (let i = 0; i < 15; i++) {
       const heart = document.createElement('div');
@@ -190,8 +189,10 @@
       heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
       heartsContainer.appendChild(heart);
     }
+  </script>
 
-    // Facebook Pixel
+  <!-- Facebook Pixel com localStorage -->
+  <script>
     !function(f,b,e,v,n,t,s){
       if(f.fbq)return;n=f.fbq=function(){
         n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -201,14 +202,17 @@
       s.parentNode.insertBefore(t,s)
     }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', '1112317040712590');
-    fbq('track', 'Purchase', {
-      value: 19.90,
-      currency: 'BRL',
-      content_name: 'Acesso Premium - 30 dias - Camila',
-      content_ids: ['premium1mes-camila'],
-      content_type: 'product'
-    });
+    if (!localStorage.getItem('purchaseFired_1990')) {
+      fbq('init', '1112317040712590');
+      fbq('track', 'Purchase', {
+        value: 19.90,
+        currency: 'BRL',
+        content_name: 'Acesso Premium - 30 dias - Camila',
+        content_ids: ['premium1mes-camila'],
+        content_type: 'product'
+      });
+      localStorage.setItem('purchaseFired_1990', 'true');
+    }
   </script>
 
   <noscript>
