@@ -1099,3 +1099,128 @@ main {
         flex-wrap: wrap;
     }
 }
+/* Adicione estas regras ao final do seu CSS existente */
+
+/* ========== Responsividade Global ========== */
+@media (max-width: 767px) {
+  /* Ajustes gerais */
+  .container {
+    padding: 0 1rem;
+  }
+  
+  /* Header */
+  .header-container {
+    height: 60px;
+    padding: 0 1rem;
+  }
+  
+  .logo-image {
+    height: 40px;
+  }
+  
+  /* Perfil compacto */
+  .profile-compact {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .profile-stats {
+    justify-content: center;
+  }
+  
+  /* Player de áudio */
+  .audio-controls {
+    flex-wrap: wrap;
+  }
+  
+  .progress-container {
+    width: 100%;
+    order: 2;
+    margin-top: 10px;
+  }
+  
+  .time-display {
+    text-align: left;
+    min-width: auto;
+    order: 1;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .volume-control {
+    margin-left: 0;
+    order: 3;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .volume-slider {
+    width: 100%;
+  }
+  
+  /* Grade de mídias - Mantém 4 itens com 2x2 */
+  .media-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Layout para perfis duplos */
+  .dual-profile-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .profile-divider {
+    transform: rotate(90deg);
+    margin: 10px 0;
+  }
+  
+  /* Grade de modelos */
+  .models-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Reviews */
+  .review-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  /* Botões */
+  .subscription-button {
+    flex-direction: column;
+    gap: 0.5rem;
+    height: auto;
+    padding: 1rem;
+  }
+  
+  .price {
+    margin-left: 0;
+  }
+  
+  /* Contador */
+  .countdown {
+    max-width: 100%;
+  }
+}
+
+/* Desktop: Mantém 4 colunas */
+@media (min-width: 768px) {
+  .media-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .models-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Previne distorções em imagens/vídeos */
+.media-item img,
+.media-item video,
+.model-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
