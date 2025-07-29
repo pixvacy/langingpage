@@ -86,7 +86,7 @@
       box-shadow: var(--shadow);
       width: 100%;
       max-width: 450px;
-      padding: 80px 30px 30px; /* Aumentei o padding-top para 80px */
+      padding: 80px 30px 30px;
       text-align: center;
       border: 1px solid var(--darker-card);
       position: relative;
@@ -109,7 +109,7 @@
 
     .profile-message {
       position: absolute;
-      top: 70px; /* Ajuste preciso para não sobrepor */
+      top: 70px;
       left: 50%;
       transform: translateX(-50%);
       background-color: var(--primary);
@@ -134,7 +134,7 @@
       margin-bottom: 25px;
       position: relative;
       z-index: 2;
-      padding-top: 10px; /* Espaço extra de segurança */
+      padding-top: 10px;
     }
 
     .logo img {
@@ -270,7 +270,7 @@
 
     @media (max-width: 480px) {
       .verification-container {
-        padding: 70px 20px 20px; /* Ajuste proporcional para mobile */
+        padding: 70px 20px 20px;
         margin-top: 40px;
       }
       .profile-image {
@@ -279,7 +279,7 @@
         top: -40px;
       }
       .profile-message {
-        top: 50px; /* Ajuste preciso para mobile */
+        top: 50px;
         font-size: 0.7rem;
         padding: 5px 12px;
       }
@@ -333,7 +333,7 @@
     </div>
 
     <div class="countdown" id="count">
-      Redirecionando em <span id="timer">7</span> segundos...
+      Redirecionando em <span id="timer">5</span> segundos...
       <span class="loader" id="spin"></span>
     </div>
 
@@ -386,7 +386,7 @@
       }
 
       // Simular requisição de localização
-      let seconds = 7;
+      let seconds = 5;
 
       const interval = setInterval(() => {
         seconds--;
