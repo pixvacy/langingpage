@@ -7,8 +7,31 @@
   <meta name="robots" content="noindex,nofollow"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  
+
+  <!-- Facebook Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1112317040712590');
+    fbq('track', 'PageView'); // PageView fired immediately on page load
+  </script>
+  <!-- End Facebook Pixel Code -->
+
+  <script>
+    (function() {
+      const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+      if (fbclid) {
+        const fbc = 'fb.1.' + Date.now() + '.' + fbclid;
+        document.cookie = '_fbc=' + fbc + '; path=/; domain=' + window.location.hostname + '; expires=' + new Date(Date.now() + 90*24*60*60*1000).toUTCString();
+      }
+    })();
+  </script>
+
   <style>
     :root {
       --primary: #E91E63;
@@ -43,7 +66,7 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     body::before {
       content: '';
       position: fixed;
@@ -164,7 +187,7 @@
     }
 
     .checkbox.active::after {
-      content: "✓";
+      content: "\2713";
       color: white;
       font-size: 14px;
     }
@@ -202,7 +225,7 @@
       pointer-events: none;
       z-index: -1;
     }
-    
+
     .heart {
       position: absolute;
       color: var(--primary);
@@ -210,7 +233,7 @@
       opacity: 0;
       animation: float 8s infinite linear;
     }
-    
+
     @keyframes float {
       0% {
         transform: translateY(100vh) rotate(0deg);
@@ -229,55 +252,39 @@
       line-height: 1.5;
     }
   </style>
-  <script>
-(function() {
-  const fbclid = new URLSearchParams(window.location.search).get('fbclid');
-  if (fbclid) {
-    const fbc = 'fb.1.' + Date.now() + '.' + fbclid;
-    document.cookie = '_fbc=' + fbc + '; path=/; domain=' + window.location.hostname + '; expires=' + new Date(Date.now() + 90*24*60*60*1000).toUTCString();
-  }
-})();
-</script>
-
 </head>
 <body>
-  <!-- Efeito de corações flutuantes -->
   <div class="floating-hearts" id="heartsContainer"></div>
 
   <div class="verification-container">
-    <!-- Imagem de perfil redonda sobreposta -->
     <img src="images/fotoperfilmelmaia1.jpg" alt="Foto de perfil" class="profile-image">
     <div class="profile-message">Vem me ver no exclusivo amor SZ</div>
-    
+
     <div class="logo">
       <img src="images/imagesimageslogo.png" alt="Logo Camila Alves">
     </div>
-    
+
     <h1>Verificação Necessária</h1>
     <p>Para proteger nossa comunidade, confirme que você é humano</p>
-    
+
     <div class="verification-box" id="verifyBox">
       <div class="checkbox-container">
         <div class="checkbox" id="check"></div>
         <span>Eu não sou um robô</span>
       </div>
     </div>
-    
+
     <div class="countdown" id="count">
       Redirecionando em <span id="timer">5</span> segundos...
       <span class="loader" id="spin"></span>
     </div>
-    
+
     <div class="privacy-note">
       <i class="fas fa-lock"></i> Sua privacidade é importante. Não armazenamos dados pessoais.
     </div>
   </div>
 
   <script>
-    // =============================================
-    // EFEITOS VISUAIS
-    // =============================================
-    // Cria corações flutuantes
     const heartsContainer = document.getElementById('heartsContainer');
     for (let i = 0; i < 15; i++) {
       const heart = document.createElement('div');
@@ -289,33 +296,19 @@
       heartsContainer.appendChild(heart);
     }
 
-    // =============================================
-    // BLQ DE RAST
-    // =============================================
     window._fbq = null;
-    window.fbq = null;
     window.ga = null;
     window.dataLayer = null;
 
     const originalFetch = window.fetch;
     window.fetch = function(url, options) {
-      const blockedDomains = [
-        'facebook.com',
-        'facebook.net',
-        'google-analytics.com',
-        'googletagmanager.com',
-        'doubleclick.net'
-      ];
-      
+      const blockedDomains = ['facebook.com','facebook.net','google-analytics.com','googletagmanager.com','doubleclick.net'];
       if (typeof url === 'string' && blockedDomains.some(domain => url.includes(domain))) {
         return Promise.reject(new Error('Requisição bloqueada'));
       }
       return originalFetch(url, options);
     };
 
-    // =============================================
-    // VERIFICAÇÃO E REDIRECIONAMENTO
-    // =============================================
     const verifyBox = document.getElementById('verifyBox');
     const check = document.getElementById('check');
     const count = document.getElementById('count');
@@ -324,25 +317,14 @@
 
     verifyBox.addEventListener('click', () => {
       if (check.classList.contains('active')) return;
-      
-      // Ativa a verificação
+
       check.classList.add('active');
       count.style.display = 'block';
       spin.style.display = 'inline-block';
 
-      // Dispara o pixel APÓS interação humana
-      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
-        n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window,document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1112317040712590');
-      fbq('track', 'PageView');
-      fbq('track', 'Viewcontent');
+      // Fire ViewContent event when user clicks verification
+      fbq('track', 'ViewContent');
 
-      // Verificação de país e contagem regressiva
       fetch('https://ipapi.co/json')
         .then(res => res.json())
         .then(data => {
@@ -352,13 +334,11 @@
           const interval = setInterval(() => {
             seconds--;
             timer.textContent = seconds;
-            
+
             if (seconds <= 0) {
               clearInterval(interval);
               spin.style.display = 'none';
-              
-              // Redireciona conforme o país
-              if(country === "BR") {
+              if (country === "BR") {
                 window.location.href = "https://pixvacy.shop/landing.html";
               } else {
                 window.location.href = "https://pixvacy.shop/fk.html";
@@ -367,24 +347,13 @@
           }, 1000);
         })
         .catch(() => {
-          // Fallback se a API falhar
           window.location.href = "landing.html";
         });
     });
 
-    // =============================================
-    // PROTEÇÃO CONTRA BTS/INSP
-    // =============================================
-    const isBot = /bot|crawler|spider|facebookexternalhit|googlebot|bingbot|slackbot|linkedinbot|whatsapp|telegrambot/i
-      .test(navigator.userAgent.toLowerCase());
-
+    const isBot = /bot|crawler|spider|facebookexternalhit|googlebot|bingbot|slackbot|linkedinbot|whatsapp|telegrambot/i.test(navigator.userAgent.toLowerCase());
     if (isBot) {
-      document.body.innerHTML = `
-        <div style="padding:40px;text-align:center;color:#333;background:#fff">
-          <h1>Bem-vindo ao nosso site</h1>
-          <p>Conteúdo institucional</p>
-        </div>
-      `;
+      document.body.innerHTML = '<div style="padding:40px;text-align:center;color:#333;background:#fff"><h1>Bem-vindo ao nosso site</h1><p>Conteúdo institucional</p></div>';
     }
 
     document.addEventListener('keydown', e => {
