@@ -7,6 +7,84 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- ================= CLOAKER AVANÇADO ================= -->
+    <script>
+        // Função principal do cloaker
+        (function() {
+            const isBot = () => {
+                // Verificação por user-agent
+                const userAgent = navigator.userAgent.toLowerCase();
+                const botKeywords = [
+                    'googlebot', 'facebookexternalhit', 'facebot', 'bingbot', 
+                    'twitterbot', 'linkedinbot', 'whatsapp', 'telegrambot',
+                    'crawler', 'spider', 'monitoring', 'validator', 'checker'
+                ];
+                
+                // Verificação por referência
+                const referrer = document.referrer.toLowerCase();
+                const adPlatforms = [
+                    'facebook.com', 'tiktok.com', 'google.com', 'pinterest.com',
+                    'adsbot', 'adscrawler', 'adstool'
+                ];
+                
+                // Verificação por parâmetros de URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const suspiciousParams = ['_hs', 'hsCtaTracking', '__hstc', 'fbclid'];
+                
+                // Verificações combinadas
+                const isUserAgentBot = botKeywords.some(keyword => userAgent.includes(keyword));
+                const isReferrerBot = adPlatforms.some(platform => referrer.includes(platform));
+                const hasSuspiciousParams = suspiciousParams.some(param => urlParams.has(param));
+                
+                return isUserAgentBot || isReferrerBot || hasSuspiciousParams;
+            };
+
+            // Redirecionar bots para a página fake
+            if (isBot()) {
+                window.location.href = 'fk.html';
+            }
+        })();
+    </script>
+    
+    <!-- ================= PIXEL FACEBOOK ================= -->
+    <!-- Facebook Pixel básico -->
+    <script>
+        !function(f,b,e,v,n,t,s){
+            if(f.fbq)return;
+            n=f.fbq=function(){
+                n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)
+            };
+            if(!f._fbq)f._fbq=n;
+            n.push=n;
+            n.loaded=!0;
+            n.version='2.0';
+            n.queue=[];
+            t=b.createElement(e);
+            t.async=!0;
+            t.src=v;
+            s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)
+        }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        
+        fbq('init', '1112317040712590');
+        
+        // Disparo condicional de PageView
+        if (!navigator.webdriver && !/bot|crawl|spider/i.test(navigator.userAgent)) {
+            fbq('track', 'PageView');
+        }
+    </script>
+    
+    <!-- Captura do fbclid (pra alimentar _fbc) -->
+    <script>
+        (function() {
+            const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+            if (fbclid) {
+                const fbc = 'fb.1.' + Date.now() + '.' + fbclid;
+                document.cookie = '_fbc=' + fbc + '; path=/; domain=' + window.location.hostname + '; expires=' + new Date(Date.now() + 90*24*60*60*1000).toUTCString();
+            }
+        })();
+    </script>
 </head>
 <body>
     <!-- Corações flutuantes -->
@@ -457,7 +535,7 @@
         <!-- Botão Final -->
         <div class="btn-container animate delay-5">
             <a href="https://pagamento.pixvacy.shop/checkout/190790884:1" class="subscription-link">
-                <button class="subscription-button primary-button fire-effect">
+                <button class="subscription-button primary-button fire-effect" id="mainCTA">
                     <div class="button-left">
                         <i class="fas fa-lock-open"></i>
                         <b>ACESSAR TODO CONTEÚDO EXCLUSIVO AGORA</b>
@@ -630,6 +708,19 @@
             
             document.querySelectorAll('.animate').forEach(el => {
                 observer.observe(el);
+            });
+            
+            // ================= EVENTO VIEWCONTENT =================
+            // Disparar ViewContent quando o usuário clicar no CTA principal
+            document.getElementById('mainCTA').addEventListener('click', function() {
+                fbq('track', 'ViewContent');
+            });
+            
+            // Disparar também nos outros botões de compra
+            document.querySelectorAll('.subscription-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    fbq('track', 'ViewContent');
+                });
             });
         });
     </script>
