@@ -23,14 +23,21 @@
   <!-- End Facebook Pixel Code -->
 
   <script>
-    (function() {
-      const fbclid = new URLSearchParams(window.location.search).get('fbclid');
-      const fbc = fbclid 
-        ? 'fb.1.' + Date.now() + '.' + fbclid
-        : 'fb.1.' + Date.now() + '.EMPTY';
-      document.cookie = '_fbc=' + fbc + '; path=/; domain=' + window.location.hostname + '; expires=' + new Date(Date.now() + 90*24*60*60*1000).toUTCString();
-    })();
-  </script>
+  (function() {
+    const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+    if (!fbclid) return; // Não criar cookie se não houver fbclid
+
+    const timestampInSeconds = Math.floor(Date.now() / 1000);
+    const fbc = 'fb.1.' + timestampInSeconds + '.' + fbclid;
+
+    document.cookie = '_fbc=' + fbc
+      + '; path=/'
+      + '; expires=' + new Date(Date.now() + 90*24*60*60*1000).toUTCString()
+      + (location.protocol === 'https:' ? '; Secure' : '')
+      + '; SameSite=Lax';
+  })();
+</script>
+
 
   <style>
     :root {
