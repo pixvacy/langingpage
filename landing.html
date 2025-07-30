@@ -224,7 +224,7 @@
                 </div>
                 
                 <a href="https://pagamento.pixvacy.shop/checkout/190790771:1" class="subscription-link">
-                    <button class="subscription-button primary-button" id="camilaButton">
+                    <button class="subscription-button primary-button">
                         <div class="button-left">
                             <i class="fas fa-star"></i>
                             <b>ACESSO VITALÍCIO CAMILA</b>
@@ -710,22 +710,29 @@
                 observer.observe(el);
             });
             
-            // ================= EVENTO SUBSCRIBEDBUTTONCLICK =================
-            // Disparar evento corrigido para o botão da Camila
-            document.getElementById('camilaButton').addEventListener('click', function() {
-                fbq('track', 'SubscribedButtonClick', {
-                    buttonFeatures: {
-                        innerText: "ACESSO VITALÍCIO CAMILA\nR$ 22,90"
-                    },
-                    buttonText: "ACESSO VITALÍCIO CAMILA R$ 22,90"
+            // ================= EVENTOS DE ENGAGEMENT =================
+            // Evento de tempo na página (30 segundos)
+            setTimeout(() => {
+                fbq('trackCustom', 'TempoNaPagina', {
+                    tempo: 30,
+                    unidade: 'segundos'
                 });
-            });
+            }, 30000);
             
-            // Disparar ViewContent para todos os botões
-            document.querySelectorAll('.subscription-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    fbq('track', 'ViewContent');
-                });
+            // Evento de scroll (75% da página)
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+                const scrollPercentage = (scrollPosition / (documentHeight - windowHeight)) * 100;
+                
+                if (scrollPercentage >= 75 && !window.scrollEventFired) {
+                    window.scrollEventFired = true;
+                    
+                    fbq('trackCustom', 'ScrollProfundo', {
+                        porcentagem: 75
+                    });
+                }
             });
         });
     </script>
