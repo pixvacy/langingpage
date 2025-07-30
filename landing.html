@@ -224,7 +224,7 @@
                 </div>
                 
                 <a href="https://pagamento.pixvacy.shop/checkout/190790771:1" class="subscription-link">
-                    <button class="subscription-button primary-button">
+                    <button class="subscription-button primary-button" id="camilaButton">
                         <div class="button-left">
                             <i class="fas fa-star"></i>
                             <b>ACESSO VITALÍCIO CAMILA</b>
@@ -710,13 +710,18 @@
                 observer.observe(el);
             });
             
-            // ================= EVENTO VIEWCONTENT =================
-            // Disparar ViewContent quando o usuário clicar no CTA principal
-            document.getElementById('mainCTA').addEventListener('click', function() {
-                fbq('track', 'ViewContent');
+            // ================= EVENTO SUBSCRIBEDBUTTONCLICK =================
+            // Disparar evento corrigido para o botão da Camila
+            document.getElementById('camilaButton').addEventListener('click', function() {
+                fbq('track', 'SubscribedButtonClick', {
+                    buttonFeatures: {
+                        innerText: "ACESSO VITALÍCIO CAMILA\nR$ 22,90"
+                    },
+                    buttonText: "ACESSO VITALÍCIO CAMILA R$ 22,90"
+                });
             });
             
-            // Disparar também nos outros botões de compra
+            // Disparar ViewContent para todos os botões
             document.querySelectorAll('.subscription-button').forEach(button => {
                 button.addEventListener('click', function() {
                     fbq('track', 'ViewContent');
